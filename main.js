@@ -1,5 +1,4 @@
-const API_URL =
-  "https://script.google.com/macros/s/AKfycbwWsXkg5EJ_5WGC5iX-ZIEUokPrSqhc3F2AMbwpjk1Y8UgE0H7nKUpBjh0kVCZyRLA/exec";
+const API_URL = "https://script.google.com/macros/s/…/exec";
 
 document.getElementById("checkBtn").addEventListener("click", () => {
   const code = document.getElementById("serial").value.trim();
@@ -15,9 +14,9 @@ document.getElementById("checkBtn").addEventListener("click", () => {
     .then((data) => {
       if (data.exists) {
         if (data.status === "active") {
-          msg.innerHTML = `✔ العضو مفعل: <strong>${data.name}</strong>`;
+          msg.innerHTML = `✔ العضو <strong>${data.name}</strong> لا يزال موجودًا في مجالس الورّاقين.`;
         } else {
-          msg.innerHTML = `✖ العضو موقوف: <strong>${data.name}</strong>`;
+          msg.innerHTML = `✖ العضو <strong>${data.name}</strong> لم يعد موجودًا في مجالس الورّاقين.`;
         }
       } else {
         msg.textContent = "✖ الرقم غير موجود في قاعدة البيانات.";
