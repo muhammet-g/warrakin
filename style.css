@@ -2,7 +2,7 @@
 body {
   font-family: sans-serif;
   margin: 0;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,29 +21,30 @@ body {
     #3d85c2,
     #4682b4
   );
+  padding: 1rem; /* مسافة حول المحتوى على الموبايل */
+  box-sizing: border-box;
 }
 
-/* الحاوية الرئيسية: عمود، مسافات متساوية بين العناصر، وعرض ثابت */
+/* الحاوية الرئيسية */
 .container {
-  width: 400px;
-  height: 300px; /* يمكنك تغييره حسب الحاجة */
+  width: 90%;
+  max-width: 400px; /* لا تتجاوز 400px على الشاشات الكبيرة */
+  min-width: 280px; /* لا تقل عن 280px على الشاشات الصغيرة */
   padding: 1.5rem;
   background: #fff;
   border-radius: 8px;
   box-sizing: border-box;
   display: flex;
-  flex-direction: column; /* ترتيب عمودي */
-  justify-content: space-evenly; /* مسافات متساوية عموديّاً */
-  align-items: center; /* تمركز أفقي */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), 0 54px 55px rgba(0, 0, 0, 0.25),
-    0 -12px 30px rgba(0, 0, 0, 0.12), 0 4px 6px rgba(0, 0, 0, 0.12),
-    0 12px 13px rgba(0, 0, 0, 0.17), 0 -3px 5px rgba(0, 0, 0, 0.09);
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
   text-align: center;
+  /* ظلّ خفيف */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.12);
 }
 
 /* نجعل كل عنصر داخلي يشغل العرض الكامل */
 .container > * {
-  display: block;
   width: 100%;
   box-sizing: border-box;
 }
@@ -51,14 +52,16 @@ body {
 /* حقل الإدخال */
 input {
   padding: 0.75rem 1rem;
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
   border: 1px solid #ccc;
   border-radius: 4px;
+  margin-bottom: 0.5rem;
 }
 
 /* زرّ التحقق */
 button {
   padding: 0.75rem 1rem;
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
   text-transform: uppercase;
   font-weight: bold;
   cursor: pointer;
@@ -72,16 +75,60 @@ button {
   color: #fff;
   border: none;
   border-radius: 10px;
-  transition: background-position 0.5s;
-  box-shadow: 0 0 20px #eee;
+  transition: background-position 0.5s, transform 0.2s;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 button:hover {
   background-position: right center;
+  transform: scale(1.02);
 }
 
-/* رسالة الحالة */
+/* إضافات لتنسيق حالة العضو */
 #message {
-  font-size: 1.1rem;
-  color: #444;
+  margin-top: 1rem;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  min-height: 1.4em;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  box-sizing: border-box;
+  display: inline-block;
+}
+
+/* حالة المفعل: خلفية خضراء فاتحة ونص أخضر داكن */
+#message.success {
+  background-color: #e6ffed;
+  color: #2d7a2d;
+  border: 1px solid #2d7a2d;
+}
+
+/* حالة الموقوف أو المزال: خلفية حمراء فاتحة ونص أحمر داكن */
+#message.error {
+  background-color: #ffe6e6;
+  color: #a12d2d;
+  border: 1px solid #a12d2d;
+}
+
+/* نقاط التوقف (Breakpoints) */
+@media (max-width: 480px) {
+  .container {
+    padding: 1rem;
+  }
+  input,
+  button {
+    padding: 0.6rem 0.8rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 450px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 500px;
+  }
 }
